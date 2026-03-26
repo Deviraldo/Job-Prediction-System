@@ -1,23 +1,23 @@
 import numpy as np
-import pandas as pd
-import streamlit as st
 import pickle
-
+import streamlit as st
 lg = pickle.load(open('placement.pkl','rb'))
 
 #Web App
-st.title("Job Placement Prediction")
+st.title("Job Placement Prediction Model") 
 
-input_text = st.text_input("Enter all features")
+input_text = st.text_input("Enter all the features")
+input_list = input_text.split(',')
 
-
-if input_text:
+if input_list:
     input_list = input_text.split(',')
-    
-    np_df = np.asarray(input_list,dtype=float )
+
+    np_df = np.asarray(input_list,dtype=float)
     prediction = lg.predict(np_df.reshape(1,-1))
 
-    if prediction[0] == 1:
-        st.write("The person is placed")
+    if prediction[0]==1:
+        print("Person is placed")
+    
     else :
-        st.write("The person is not placed")
+        print("Person is not placed")
+    
